@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  telechat-bot:
+    build: .
+    container_name: telechat-bot
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      # 从.env文件或环境变量中读取
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - DEEPSEEK_BASE_URL=${DEEPSEEK_BASE_URL}
+      - MOONSHOT_API_KEY=${MOONSHOT_API_KEY}
+      - MOONSHOT_BASE_URL=${MOONSHOT_BASE_URL}
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - MINIMAX_GROUP_ID=${MINIMAX_GROUP_ID}
+      - MINIMAX_BASE_URL=${MINIMAX_BASE_URL}
+    volumes:
+      # 持久化数据目录
+      - ./data:/app/data
+      - ./logs:/app/logs
+      # 临时文件目录
+      - telechat-temp:/app/temp
+    networks:
+      - telechat-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('Health check')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  telechat-temp:
+    driver: local
+
+networks:
+  telechat-network:
+    driver: bridge
