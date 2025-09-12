@@ -13,7 +13,7 @@ yarn-error.log*
 temp/
 *.tmp
 *.temp
-
+*.gz
 # 日志文件
 logs/
 *.log
