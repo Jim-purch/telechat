@@ -13,12 +13,6 @@ RUN npm install --only=production
 # 复制应用源代码
 COPY . .
 
-# 创建必要的目录
-RUN mkdir -p data logs temp
-
-# 设置权限
-RUN chmod -R 755 data logs temp
-
 # 暴露端口（如果需要健康检查或监控）
 EXPOSE 3000
 
@@ -29,8 +23,11 @@ ENV NODE_ENV=production
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S telechat -u 1001
 
-# 更改文件所有权
-RUN chown -R telechat:nodejs /app
+# 创建必要的目录并设置权限
+RUN mkdir -p data logs temp && \
+    chown -R telechat:nodejs /app && \
+    chmod -R 755 /app
+
 USER telechat
 
 # 启动应用
