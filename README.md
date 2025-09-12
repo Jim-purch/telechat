@@ -146,6 +146,35 @@ npm run dev
    docker logs -f telechat-bot
    ```
 
+### 📦 离线部署（无网络环境）
+
+如果目标服务器无法访问互联网，可以使用离线部署包：
+
+**1. 构建离线部署包（在有网络的机器上）：**
+```bash
+./build-offline-package.sh
+```
+
+**2. 传输到目标服务器：**
+```bash
+# 生成的压缩包文件名类似：telechat-offline-20240101_120000.tar.gz
+scp telechat-offline-*.tar.gz user@server:/path/to/deploy/
+```
+
+**3. 在目标服务器上部署：**
+```bash
+tar -xzf telechat-offline-*.tar.gz
+cd telechat-offline-*/
+./offline-deploy.sh
+```
+
+**离线部署特点：**
+- ✅ 无需网络连接
+- ✅ 包含完整的Docker镜像
+- ✅ 一键部署脚本
+- ✅ 自动配置环境
+- ✅ 适合内网环境
+
 ### Docker 优势
 
 - ✅ **环境一致性**: 确保在任何环境中都能正常运行
