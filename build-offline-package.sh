@@ -118,6 +118,23 @@ create_package() {
     # 复制镜像文件
     cp "temp_export/${IMAGE_NAME}.tar.gz" "$PACKAGE_NAME/"
     
+    # 复制项目源代码和配置文件
+    print_info "复制项目文件..."
+    
+    # 复制核心文件
+    cp package.json "$PACKAGE_NAME/"
+    cp package-lock.json "$PACKAGE_NAME/" 2>/dev/null || true
+    cp index.js "$PACKAGE_NAME/"
+    cp Dockerfile "$PACKAGE_NAME/"
+    cp .dockerignore "$PACKAGE_NAME/" 2>/dev/null || true
+    
+    # 复制目录
+    cp -r services "$PACKAGE_NAME/" 2>/dev/null || true
+    cp -r utils "$PACKAGE_NAME/" 2>/dev/null || true
+    cp -r middleware "$PACKAGE_NAME/" 2>/dev/null || true
+    cp -r scripts "$PACKAGE_NAME/" 2>/dev/null || true
+    cp -r data "$PACKAGE_NAME/" 2>/dev/null || true
+    
     # 复制配置文件
     cp docker-compose.yml "$PACKAGE_NAME/"
     cp .env.example "$PACKAGE_NAME/"
@@ -251,8 +268,23 @@ EOF
 
 ## 包含文件
 
+### Docker 相关
 - \`telechat-bot.tar.gz\` - Docker 镜像文件
+- \`Dockerfile\` - Docker 构建文件
 - \`docker-compose.yml\` - Docker Compose 配置
+- \`.dockerignore\` - Docker 忽略文件
+
+### 项目源代码
+- \`package.json\` - Node.js 依赖配置
+- \`package-lock.json\` - 依赖版本锁定文件
+- \`index.js\` - 主程序入口
+- \`services/\` - 服务模块目录
+- \`utils/\` - 工具函数目录
+- \`middleware/\` - 中间件目录
+- \`scripts/\` - 脚本目录
+- \`data/\` - 数据文件目录
+
+### 配置和文档
 - \`.env.example\` - 环境变量模板
 - \`offline-deploy.sh\` - 一键部署脚本
 - \`README.md\` - 项目说明文档
