@@ -1,0 +1,32 @@
+{
+  "name": "telechat-bot",
+  "version": "1.0.0",
+  "description": "Telegram机器人，集成DeepSeek AI和MiniMax语音合成",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "deepseek",
+    "minimax",
+    "tts",
+    "ai"
+  ],
+  "author": "Afire",
+  "license": "MIT",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "form-data": "^4.0.0",
+    "fs-extra": "^11.2.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

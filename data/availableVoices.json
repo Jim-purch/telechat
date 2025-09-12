@@ -1,0 +1,132 @@
+{
+  "lastUpdated": "2025-09-12T05:26:08.272Z",
+  "voicesData": {
+    "system_voice": [
+            {
+        "voice_id": "Chinese (Mandarin)_Mature_Woman",
+        "description": [
+          "标准普通话的迷人成熟女性声音"
+        ],
+        "voice_name": "成熟女性",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_BashfulGirl",
+        "description": [
+          "标准普通话的害羞腼腆少女声音"
+        ],
+        "voice_name": "害羞少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Crisp_Girl",
+        "description": [
+          "标准普通话的温暖清脆年轻女性声音"
+        ],
+        "voice_name": "清脆少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Cute_Spirit",
+        "description": [
+          "标准普通话的可爱甜美少女精灵声音"
+        ],
+        "voice_name": "可爱精灵",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Warm_Girl",
+        "description": [
+          "标准普通话的柔和温暖年轻女性声音"
+        ],
+        "voice_name": "温暖少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_ExplorativeGirl",
+        "description": [
+          "标准普通话的探索好奇成年女性声音"
+        ],
+        "voice_name": "探索少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Laid_BackGirl",
+        "description": [
+          "标准普通话的轻松悠闲成年女性声音"
+        ],
+        "voice_name": "悠闲少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Warm_HeartedGirl",
+        "description": [
+          "标准普通话的热心关怀成年女性声音"
+        ],
+        "voice_name": "热心少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Gentle_Senior",
+        "description": [
+          "标准普通话的温和舒适成熟女性声音"
+        ],
+        "voice_name": "温和长者",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Sweet_Lady",
+        "description": [
+          "标准普通话的温柔甜美成年女性声音"
+        ],
+        "voice_name": "甜美女士",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Arrogant_Miss",
+        "description": [
+          "标准普通话的傲慢自信成年女性声音，展现优越感"
+        ],
+        "voice_name": "傲慢小姐",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_IntellectualGirl",
+        "description": [
+          "标准普通话的知性清晰成年女性声音，富有学识"
+        ],
+        "voice_name": "知性少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Soft_Girl",
+        "description": [
+          "带有南方口音的温和柔软成年女性声音"
+        ],
+        "voice_name": "柔和少女",
+        "created_time": "2025-01-01"
+      },      {
+        "voice_id": "Chinese (Mandarin)_Warm_Bestie",
+        "description": [
+          "标准普通话的温暖清脆闺蜜声音，友好清晰"
+        ],
+        "voice_name": "温暖闺蜜",
+        "created_time": "2025-01-01"
+      }
+    ],
+    "voice_cloning": [],
+    "voice_generation": [],
+    "music_generation": [],
+    "voice_slots": null,
+    "base_resp": {
+      "status_code": 0,
+      "status_msg": "success"
+    }
+  },
+  "chineseFemaleVoices": [
+    {
+      "id": "female-shaonv",
+      "name": "少女音",
+      "type": "default"
+    },
+    {
+      "id": "female-yujie",
+      "name": "御姐音",
+      "type": "default"
+    },
+    {
+      "id": "female-chengshu",
+      "name": "成熟女声",
+      "type": "default"
+    }
+  ],
+  "defaultVoice": "female-shaonv"
+}
