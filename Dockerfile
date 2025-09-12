@@ -26,7 +26,8 @@ RUN adduser -S telechat -u 1001
 # 创建必要的目录并设置权限
 RUN mkdir -p data logs temp && \
     chown -R telechat:nodejs /app && \
-    chmod -R 755 /app
+    chmod -R 755 /app && \
+    chmod -R 777 data logs temp
 
 USER telechat
 
