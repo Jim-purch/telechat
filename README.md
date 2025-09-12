@@ -158,21 +158,37 @@ npm run dev
 
 ### 🚀 一键部署（推荐）
 
-我们提供了一键部署脚本，适用于 Ubuntu/Debian 系统：
+#### 公开仓库部署
+
+如果您的仓库是公开的，可以使用以下命令：
 
 ```bash
 # 下载并运行部署脚本
 curl -fsSL https://raw.githubusercontent.com/Jim-purch/telechat/main/deploy.sh | bash
 ```
 
-或者手动下载后运行：
+#### 私有仓库部署
+
+如果您的仓库是私有的，请使用以下方式：
 
 ```bash
-# 克隆项目
-git clone https://github.com/Jim-purch/telechat.git
+# 方式一：使用SSH密钥克隆（推荐）
+git clone git@github.com:Jim-purch/telechat.git
 cd telechat
+./deploy.sh
+```
 
-# 运行部署脚本
+```bash
+# 方式二：使用个人访问令牌
+git clone https://your-token@github.com/Jim-purch/telechat.git
+cd telechat
+./deploy.sh
+```
+
+```bash
+# 方式三：手动上传文件后运行
+# 将项目文件上传到服务器后
+cd telechat
 ./deploy.sh
 ```
 

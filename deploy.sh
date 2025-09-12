@@ -144,6 +144,12 @@ install_git() {
 clone_project() {
     PROJECT_DIR="$HOME/telechat"
     
+    # 检查是否已经在项目目录中
+    if [[ "$(basename $(pwd))" == "telechat" && -f "package.json" ]]; then
+        print_info "检测到已在项目目录中，跳过克隆步骤"
+        return
+    fi
+    
     if [[ -d "$PROJECT_DIR" ]]; then
         print_warning "项目目录已存在: $PROJECT_DIR"
         read -p "是否删除并重新克隆？(y/N): " -n 1 -r
@@ -152,16 +158,63 @@ clone_project() {
             rm -rf "$PROJECT_DIR"
         else
             cd "$PROJECT_DIR"
-            git pull origin main
-            print_success "项目代码已更新"
+            if git remote -v &>/dev/null; then
+                print_info "尝试更新现有代码..."
+                git pull origin main || print_warning "代码更新失败，请检查仓库访问权限"
+            fi
+            print_success "使用现有项目目录"
             return
         fi
     fi
     
-    print_info "克隆项目代码..."
-    git clone https://github.com/Jim-purch/telechat.git "$PROJECT_DIR"
+    print_info "获取项目代码..."
+    
+    # 提供多种克隆方式
+    echo "请选择获取代码的方式："
+    echo "1) HTTPS 克隆（公开仓库）"
+    echo "2) SSH 克隆（需要SSH密钥）"
+    echo "3) 使用个人访问令牌"
+    echo "4) 跳过克隆（手动上传的文件）"
+    read -p "请选择 (1-4): " -n 1 -r
+    echo
+    
+    case $REPLY in
+        1)
+            git clone https://github.com/Jim-purch/telechat.git "$PROJECT_DIR" || {
+                print_error "HTTPS 克隆失败，可能是私有仓库或网络问题"
+                exit 1
+            }
+            ;;
+        2)
+            git clone git@github.com:Jim-purch/telechat.git "$PROJECT_DIR" || {
+                print_error "SSH 克隆失败，请检查SSH密钥配置"
+                exit 1
+            }
+            ;;
+        3)
+            read -p "请输入您的GitHub个人访问令牌: " -s TOKEN
+            echo
+            git clone https://$TOKEN@github.com/Jim-purch/telechat.git "$PROJECT_DIR" || {
+                print_error "令牌克隆失败，请检查令牌权限"
+                exit 1
+            }
+            ;;
+        4)
+            print_info "跳过克隆，请确保项目文件已在当前目录"
+            if [[ ! -f "package.json" ]]; then
+                print_error "未找到 package.json 文件，请确保在正确的项目目录中运行此脚本"
+                exit 1
+            fi
+            return
+            ;;
+        *)
+            print_error "无效选择"
+            exit 1
+            ;;
+    esac
+    
     cd "$PROJECT_DIR"
-    print_success "项目代码克隆完成"
+    print_success "项目代码获取完成"
 }
 
 # 配置环境变量

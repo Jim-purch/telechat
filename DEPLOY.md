@@ -81,14 +81,85 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
+## 私有仓库特别说明
+
+如果您的项目是私有仓库，需要进行额外的认证配置：
+
+### 1. 生成 GitHub 个人访问令牌
+
+1. 登录 GitHub，进入 Settings > Developer settings > Personal access tokens
+2. 点击 "Generate new token (classic)"
+3. 设置令牌名称和过期时间
+4. 选择权限范围（至少需要 `repo` 权限）
+5. 生成并保存令牌（只显示一次）
+
+### 2. 配置 SSH 密钥（推荐）
+
+```bash
+# 生成 SSH 密钥对
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+# 启动 SSH 代理
+eval "$(ssh-agent -s)"
+
+# 添加私钥到 SSH 代理
+ssh-add ~/.ssh/id_rsa
+
+# 显示公钥内容
+cat ~/.ssh/id_rsa.pub
+```
+
+然后将公钥添加到 GitHub：
+1. 复制公钥内容
+2. 进入 GitHub Settings > SSH and GPG keys
+3. 点击 "New SSH key"
+4. 粘贴公钥并保存
+
+### 3. 测试连接
+
+```bash
+# 测试 SSH 连接
+ssh -T git@github.com
+
+# 应该看到类似输出：
+# Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
 ## 步骤二：上传项目文件
 
 ### 方法一：使用 Git（推荐）
 
+#### 公开仓库
 ```bash
 # 在服务器上克隆项目
 git clone https://github.com/Jim-purch/telechat.git
 cd telechat
+```
+
+#### 私有仓库
+
+**选项 1：使用 SSH 密钥（推荐）**
+```bash
+# 首先配置 SSH 密钥
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+# 将公钥添加到 GitHub SSH Keys
+cat ~/.ssh/id_rsa.pub
+
+# 克隆私有仓库
+git clone git@github.com:Jim-purch/telechat.git
+cd telechat
+```
+
+**选项 2：使用个人访问令牌**
+```bash
+# 使用个人访问令牌克隆
+git clone https://your-token@github.com/Jim-purch/telechat.git
+cd telechat
+```
+
+**选项 3：使用用户名和密码（不推荐）**
+```bash
+# GitHub 已不支持密码认证，请使用上述方法
 ```
 
 ### 方法二：使用 SCP 上传
