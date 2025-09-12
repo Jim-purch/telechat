@@ -178,6 +178,10 @@ scp telechat.tar.gz username@your-server-ip:/home/username/
 # 解压文件
 tar -xzf telechat.tar.gz
 cd telechat
+
+# 检查并修复主机目录权限
+sudo chown -R 1001:1001 ./data ./logs
+sudo chmod -R 777 ./data ./logs
 ```
 
 ### 方法三：使用 SFTP
