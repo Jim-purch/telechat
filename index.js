@@ -9,7 +9,15 @@ const { FileManager } = require('./utils/fileManager');
 const { Logger } = require('./utils/logger');
 
 // 初始化服务
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { 
+  polling: {
+    interval: 1000,
+    autoStart: true,
+    params: {
+      timeout: 10
+    }
+  }
+});
 const deepseek = new DeepSeekService();
 const moonshot = new MoonshotService();
 const minimax = new MinimaxService();
@@ -201,6 +209,20 @@ bot.on('message', async (msg) => {
 // 错误处理
 bot.on('error', (error) => {
   logger.error('Telegram Bot 错误:', error);
+});
+
+// 轮询错误处理
+bot.on('polling_error', (error) => {
+  logger.error('轮询错误:', error);
+  
+  // 如果是网络连接错误，尝试重新连接
+  if (error.code === 'EFATAL' || error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT') {
+    console.log('🔄 检测到网络连接问题，5秒后尝试重新连接...');
+    setTimeout(() => {
+      console.log('🔄 正在重新启动轮询...');
+      bot.startPolling({ restart: true });
+    }, 5000);
+  }
 });
 
 // 优雅关闭
